@@ -13,6 +13,13 @@ export default function Homepage({ navigation }) {
           onPress={() => navigation.navigate("Register")}
         />
       </View>
+
+      <View>
+        <Button
+          title="View User"
+          onPress={() => navigation.navigate("UserList")}
+        />
+      </View>
     </View>
   );
 }
