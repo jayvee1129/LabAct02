@@ -18,6 +18,33 @@ export default function userlistpage({ navigation }) {
       });
   }, []);
 
+  const handleEdit = (user) => {
+    navigation.navigate("EditUser", { user });
+  };
+
+  const handleDeleteUser = (id) => {
+    Alert.alert(
+      "Confirm Delete",
+      "Are you sure you want to delete this user?",
+      ({ text: "Cancel", style: "cancel" },
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: () => {
+          axios
+            .delete(`http://127.0.0.1:8000/registration/api/users/${id}/`)
+            .then((res) => {
+              Alert.alert("Success", "User deleted successfully");
+            })
+            .catch((err) => {
+              console.log(err);
+              Alert.alert("Error", "Failed to delete user");
+            });
+        },
+      })
+    );
+  };
+
   return (
     <View>
       <Text style={Styles.userTitle}>Registered Users</Text>
@@ -31,6 +58,18 @@ export default function userlistpage({ navigation }) {
             <Text style={Styles.userInfo}>email: {item.email}</Text>
             <Text style={Styles.userInfo}>password: {item.password}</Text>
             <Text style={Styles.userInfo}>gender: {item.gender}</Text>
+            <View>
+              <Button
+                title="Edit"
+                color="#4ad83dff"
+                onPress={() => handleEdit(item)}
+              />
+              <Button
+                title="Delete"
+                color="#ff1818ff"
+                onPress={() => handleDeleteUser(item.id)}
+              />
+            </View>
           </View>
         )}
       />
