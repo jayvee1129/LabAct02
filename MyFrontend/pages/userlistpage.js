@@ -23,26 +23,27 @@ export default function userlistpage({ navigation }) {
   };
 
   const handleDeleteUser = (id) => {
-    Alert.alert(
-      "Confirm Delete",
-      "Are you sure you want to delete this user?",
-      ({ text: "Cancel", style: "cancel" },
-      {
-        text: "Delete",
-        style: "destructive",
-        onPress: () => {
-          axios
-            .delete(`http://127.0.0.1:8000/registration/api/users/${id}/`)
-            .then((res) => {
-              Alert.alert("Success", "User deleted successfully");
-            })
-            .catch((err) => {
-              console.log(err);
-              Alert.alert("Error", "Failed to delete user");
-            });
-        },
-      })
-    );
+    // Alert.alert(
+    //   "Confirm Delete",
+    //   "Are you sure you want to delete this user?",
+    //   ({ text: "Cancel", style: "cancel" },
+    //   {
+    //     text: "Delete",
+    //     style: "destructive",
+    //     onPress: () => {
+    //       axios
+    //         .delete(`http://127.0.0.1:8000/registration/api/users/${id}/`)
+    //         .then(() => {
+    //           Alert.alert("Success", "User deleted successfully");
+    //         })
+    //         .catch((err) => {
+    //           console.log(err);
+    //           Alert.alert("Error", "Failed to delete user");
+    //         });
+    //     },
+    //   })
+    // );
+    axios.delete(`http://127.0.0.1:8000/registration/api/users/${id}/`);
   };
 
   return (
